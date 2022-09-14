@@ -1,9 +1,9 @@
 import React from 'react';
 import ShopItem from './ShopItem';
 
-const ShopItemList = ({shopItems}) => {
+const ShopItemList = ({shopItems, handleAddToBasket}) => {
     const listItems = shopItems.map((item, index) =>{
-        return <ShopItem item = {item} key ={index}/>
+        return <ShopItem item = {item} key ={index} onAddToBasket = {handleAddToBasket}/>
     })
 
     return (
