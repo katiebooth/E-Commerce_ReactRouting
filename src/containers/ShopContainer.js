@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import ErrorPage from '../components/ErrorPage';
 import BasketList from '../components/BasketList'
 import ShopItemList from '../components/ShopItemList';
+import DisplayItem from '../components/DisplayItem';
 
 const ShopContainer = () => {
 
@@ -23,6 +24,14 @@ const ShopContainer = () => {
             return JSON.parse(basketItemsJSON)}
     })
 
+    const [selectedItem, setSelectedItem] = useState(()=>{
+        const selectedItemJSON = localStorage.getItem('selected item')
+        if (selectedItemJSON == null) {
+            return []}
+        else {
+            return JSON.parse(selectedItemJSON)}
+    })
+
     const handleAddToBasket = ({item}) => {
         const copyBasketItems = [...basketItems]
         copyBasketItems.push(item)
@@ -35,17 +44,30 @@ const ShopContainer = () => {
         copyBasketItems.splice(index,1)
         setBasketItems(copyBasketItems)
     }
+
+    const onItemSelected = (itemSelected) =>{
+        setSelectedItem(itemSelected)
+    }
     
     useEffect(()=> {
         localStorage.setItem('basket items', JSON.stringify(basketItems))
         }, [basketItems])
 
+    useEffect(()=> {
+        localStorage.setItem('selected item', JSON.stringify(selectedItem))
+        }, [selectedItem])
+
+    // const getItemForId = (itemId) => {
+    //     return shopItems.find((item) => item.id === itemId);
+    //     };
+
  return (
     <Router>
     <NavBar/>
     <Routes>
-        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket}/>}/>
-        <Route path = '/basket' element={<BasketList basketItems = {basketItems} handleRemoveFromBasket = {handleRemoveFromBasket}/>}/>
+        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket} onItemSelected={onItemSelected}/>}/>
+        <Route path = '/basket' element={<BasketList basketItems = {basketItems} handleRemoveFromBasket = {handleRemoveFromBasket} />}/>
+        <Route path= "/displayitem/:id" element={<DisplayItem selectedItem = {selectedItem} />} />
         <Route path = '*' element={<ErrorPage/>}/>
     </Routes>
     </Router>

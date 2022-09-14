@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledItem = styled.li`
     list-style-type: none;
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr 1fr;
     padding: 0.5em;
     width: auto;
     justify-content: center;
     text-align: center;
     font-weight: bold;
-    white-space: pre-line
 
 `
 
@@ -21,13 +21,20 @@ const ItemImage = styled.img`
 
 const BasketButton = styled.button`
     border-radius: 8px;
-    border: 2px solid lightgrey
+    border: 2px solid lightgrey;
+    margin-bottom: 5px
 `
 
-const ShopItem = ({item, onAddToBasket}) => {
+const ShopItem = ({item, onAddToBasket, onItemSelected}) => {
 
     const handleClick = () => {
         onAddToBasket({item})
+    }
+
+    const navigate = useNavigate()
+
+    const navigateToProductDetails = () => {
+        navigate(`/displayitem/:id`)
     }
 
     return (<>
@@ -36,8 +43,8 @@ const ShopItem = ({item, onAddToBasket}) => {
         {item.name}<br></br>
         £{item.price}
         <ItemImage src={item.url}/>
-        <BasketButton onClick={handleClick}>Add To Basket</BasketButton>
-        
+        <BasketButton className = "button" onClick={handleClick}>Add To Basket</BasketButton>
+        <BasketButton className = "button" onClick={navigateToProductDetails}>View Product Details</BasketButton>
     </StyledItem>
 
     </>

@@ -6,14 +6,16 @@ const BasketListStyle = styled.ul`
     list-style-type: none;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 80%;
+    width: 40%;
+    margin: 0 1em;
     justify-content: center;
-    text-align: center
+    text-align: center;
+    padding: 5px
 `
 
 const Total = styled.div`
-    text-align: center;
-    font-weight: bold
+    font-weight: bold;
+    margin: 2em 100px
 `
 
 const BasketList = ({basketItems, handleRemoveFromBasket}) => {
@@ -27,8 +29,9 @@ const BasketList = ({basketItems, handleRemoveFromBasket}) => {
 
 
     return (<>
-    <BasketListStyle> {currentBasket}</BasketListStyle>
+    <BasketListStyle> {currentBasket}</BasketListStyle>   
     <Total>Basket Total : £{calculateTotal}</Total>
+       
     </>
     )
 }

@@ -8,9 +8,9 @@ const ShopListStyle = styled.ul`
     grid-template-columns: 1fr 1fr 1fr
 `
 
-const ShopItemList = ({shopItems, handleAddToBasket}) => {
+const ShopItemList = ({shopItems, handleAddToBasket, onItemSelected, navigateToProductDetails}) => {
     const listItems = shopItems.map((item, index) =>{
-        return <ShopItem item = {item} key ={index} onAddToBasket = {handleAddToBasket}/>
+        return <ShopItem item = {item} key ={index} onAddToBasket = {handleAddToBasket} onItemSelected={onItemSelected} navigateToProductDetails={navigateToProductDetails}/>
     })
 
     return (

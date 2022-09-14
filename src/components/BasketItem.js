@@ -1,3 +1,4 @@
+import { hover } from '@testing-library/user-event/dist/hover';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,11 +8,16 @@ const StyledBasketItem = styled.li`
     grid-template-rows: 1fr;
     padding: 0.5em;
     width: auto;
-    justify-content: center;
+    justify-items: center;
+    align-items: center;
     text-align: center;
     font-weight: bold;
-    white-space: pre-line
+    white-space: pre-line;
+`
 
+const BasketButton = styled.button`
+    border-radius: 8px;
+    border: 2px solid lightgrey;
 `
 
 const BasketItem = ({item, onRemoveFromBasket}) => {
@@ -26,9 +32,11 @@ const BasketItem = ({item, onRemoveFromBasket}) => {
         {item.name}
     </StyledBasketItem>
     <StyledBasketItem>
-    £{item.price}
+        £{item.price}
     </StyledBasketItem>
-    <button onClick={handleClick}>Remove From Basket</button>
+    <StyledBasketItem>
+    <BasketButton className = "button" onClick={handleClick}>Remove From Basket</BasketButton>
+    </StyledBasketItem>
 </>
 
 
