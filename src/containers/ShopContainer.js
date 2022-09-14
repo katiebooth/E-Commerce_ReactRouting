@@ -56,6 +56,8 @@ const ShopContainer = () => {
     useEffect(()=> {
         localStorage.setItem('selected item', JSON.stringify(selectedItem))
         }, [selectedItem])
+  
+    const numberOfItemsInBasket = basketItems.length
 
     // const getItemForId = (itemId) => {
     //     return shopItems.find((item) => item.id === itemId);
@@ -63,7 +65,7 @@ const ShopContainer = () => {
 
  return (
     <Router>
-    <NavBar/>
+    <NavBar numberOfItemsInBasket = {numberOfItemsInBasket}/>
     <Routes>
         <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket} onItemSelected={onItemSelected}/>}/>
         <Route path = '/basket' element={<BasketList basketItems = {basketItems} handleRemoveFromBasket = {handleRemoveFromBasket} />}/>
