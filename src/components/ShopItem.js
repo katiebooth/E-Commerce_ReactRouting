@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const StyledItem = styled.li`
     list-style-type: none;
@@ -11,9 +11,7 @@ const StyledItem = styled.li`
     justify-content: center;
     text-align: center;
     font-weight: bold;
-
 `
-
 const ItemImage = styled.img`
     height: 250px;
     margin-bottom: 10px
@@ -25,17 +23,17 @@ const BasketButton = styled.button`
     margin-bottom: 5px
 `
 
-const ShopItem = ({item, onAddToBasket, onItemSelected}) => {
+const ShopItem = ({item, onAddToBasket}) => {
 
     const handleClick = () => {
         onAddToBasket({item})
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    const navigateToProductDetails = () => {
-        navigate(`/displayitem/:id`)
-    }
+    // const navigateToProductDetails = () => {
+    //     navigate(`/displayitem/:id`)
+    // }
 
     return (<>
     
@@ -44,7 +42,7 @@ const ShopItem = ({item, onAddToBasket, onItemSelected}) => {
         £{item.price}
         <ItemImage src={item.url}/>
         <BasketButton className = "button" onClick={handleClick}>Add To Basket</BasketButton>
-        <BasketButton className = "button" onClick={navigateToProductDetails}>View Product Details</BasketButton>
+        <Link to={`/displayitem/${item.id}`}>View Product Details</Link>
     </StyledItem>
 
     </>

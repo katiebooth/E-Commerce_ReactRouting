@@ -1,17 +1,23 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
+import IndividualItem from './IndividualItem';
+import styled from 'styled-components';
 
-const DisplayItem = ({selectedItem}) =>{
-    
-    // const indexofItem = indexOf(selectedItem)
-    
-    const { itemIndex}  = useParams()
+const Heading = styled.h2`
+text-align: center
+`
+
+
+const DisplayItem = ({getProductGivenId, handleAddToBasket}) =>{
+    const {id}  = useParams()
+    const product = getProductGivenId(Number(id))
+
+    console.log(product)
 
     return (
         <>
-        <h1>This is the item page</h1>
-            <h2>{selectedItem.name}</h2>
-            <p>More information about {selectedItem.name}</p>
+        <Heading>Product Information : {product.name}</Heading>
+            <IndividualItem item = {product} onAddToBasket={handleAddToBasket}/>
         </>
     )
 }

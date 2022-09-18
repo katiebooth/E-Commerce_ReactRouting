@@ -9,11 +9,11 @@ import DisplayItem from '../components/DisplayItem';
 const ShopContainer = () => {
 
     const [shopItems, setShopItems] = useState([
-        {name: "Plant", price: 5, url: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"},
-        {name: "Table", price: 10, url : "https://images.unsplash.com/photo-1577140917170-285929fb55b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZGluaW5nJTIwdGFibGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
-        {name: "Bottle", price: 4, url : "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2F0ZXIlMjBib3R0bGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
-        {name: "Chair", price: 8, url : "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2hhaXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
-        {name: "Charger", price: 5, url : "https://images.unsplash.com/photo-1492107376256-4026437926cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGNoYXJnZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"}
+        {name: "Plant", id: 1, price: 5, details: "This bonzai plant will bring positive feng shui and zen to your home", url: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"},
+        {name: "Table", id: 2, price: 10, details: "This sleak and stylish table is perfect for hosting dinner parties", url : "https://images.unsplash.com/photo-1577140917170-285929fb55b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZGluaW5nJTIwdGFibGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
+        {name: "Bottle", id: 3, price: 4, details: "Never be thirsty again with this bottle which is perfect for on-the-go hydration", url : "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2F0ZXIlMjBib3R0bGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
+        {name: "Chair", id:4, price: 8, details: "Perfect statement piece for your home, this chair will support you whether you're reading, watching TV or working", url : "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2hhaXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"},
+        {name: "Charger", id :5, price: 5, details: "White USB charger, minimalist design", url : "https://images.unsplash.com/photo-1492107376256-4026437926cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGNoYXJnZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"}
     ])
 
     const [basketItems, setBasketItems] = useState(()=>{
@@ -24,13 +24,10 @@ const ShopContainer = () => {
             return JSON.parse(basketItemsJSON)}
     })
 
-    const [selectedItem, setSelectedItem] = useState(()=>{
-        const selectedItemJSON = localStorage.getItem('selected item')
-        if (selectedItemJSON == null) {
-            return []}
-        else {
-            return JSON.parse(selectedItemJSON)}
-    })
+    const getProductGivenId = (productId) => {
+        return shopItems.find((item) => item.id === productId);
+      };
+
 
     const handleAddToBasket = ({item}) => {
         const copyBasketItems = [...basketItems]
@@ -45,31 +42,20 @@ const ShopContainer = () => {
         setBasketItems(copyBasketItems)
     }
 
-    const onItemSelected = (itemSelected) =>{
-        setSelectedItem(itemSelected)
-    }
     
     useEffect(()=> {
         localStorage.setItem('basket items', JSON.stringify(basketItems))
         }, [basketItems])
-
-    useEffect(()=> {
-        localStorage.setItem('selected item', JSON.stringify(selectedItem))
-        }, [selectedItem])
   
     const numberOfItemsInBasket = basketItems.length
-
-    // const getItemForId = (itemId) => {
-    //     return shopItems.find((item) => item.id === itemId);
-    //     };
 
  return (
     <Router>
     <NavBar numberOfItemsInBasket = {numberOfItemsInBasket}/>
     <Routes>
-        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket} onItemSelected={onItemSelected}/>}/>
+        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket}/>}/>
         <Route path = '/basket' element={<BasketList basketItems = {basketItems} handleRemoveFromBasket = {handleRemoveFromBasket} />}/>
-        <Route path= "/displayitem/:id" element={<DisplayItem selectedItem = {selectedItem} />} />
+        <Route path= "/displayitem/:id" element={<DisplayItem getProductGivenId = {getProductGivenId} handleAddToBasket={handleAddToBasket}/>} />
         <Route path = '*' element={<ErrorPage/>}/>
     </Routes>
     </Router>
