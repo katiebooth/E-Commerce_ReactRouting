@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const BasketListStyle = styled.ul`
     list-style-type: none;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 40%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 50%;
     margin: 0 1em;
     justify-content: center;
     text-align: center;
@@ -15,7 +15,7 @@ const BasketListStyle = styled.ul`
 
 const Total = styled.div`
     font-weight: bold;
-    margin: 2em 100px
+    margin: 2em 370px
 `
 
 const BasketList = ({basketItems, handleRemoveFromBasket}) => {
@@ -24,7 +24,7 @@ const BasketList = ({basketItems, handleRemoveFromBasket}) => {
     })
 
     const calculateTotal  = basketItems.reduce((total, item) => {
-        return total + Number(item.price)
+        return total + (Number(item.price) * Number(item.quantity))
     }, 0)
 
 

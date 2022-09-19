@@ -14,13 +14,34 @@ const StyledItem = styled.li`
 `
 const ItemImage = styled.img`
     height: 250px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto
 `
 
 const BasketButton = styled.button`
     border-radius: 8px;
     border: 2px solid lightgrey;
-    margin-bottom: 5px
+    height: 40px;
+    margin-bottom: 5px;
+    &:hover {
+        background-color: darkgrey;
+        color: white
+    }
+`
+const StyledLink = styled(Link)`
+    color:black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid lightgrey;
+    margin-bottom: 10px;
+    font-size: 10pt;
+    font-weight: normal;
+    &:hover {
+        background-color: darkgrey;
+        color: white
+    }
 `
 
 const ShopItem = ({item, onAddToBasket}) => {
@@ -41,8 +62,20 @@ const ShopItem = ({item, onAddToBasket}) => {
         {item.name}<br></br>
         £{item.price}
         <ItemImage src={item.url}/>
+        <p>
+        Quantity
+        </p>
+        <div className="quantity-input">
+        <button className="quantity-input__modifier quantity-input__modifier--left" onClick={() => item.quantity -=1}>
+          &mdash;
+        </button>
+        <input className="quantity-input__screen" type="text" value={item.quantity} readOnly />
+        <button className="quantity-input__modifier quantity-input__modifier--right" onClick={() => item.quantity +=1}>
+          &#xff0b;
+        </button>  
+      </div>  
         <BasketButton className = "button" onClick={handleClick}>Add To Basket</BasketButton>
-        <Link to={`/displayitem/${item.id}`}>View Product Details</Link>
+        <StyledLink to={`/displayitem/${item.id}`}>View Product Details</StyledLink>
     </StyledItem>
 
     </>

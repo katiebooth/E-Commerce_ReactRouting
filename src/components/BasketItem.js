@@ -32,6 +32,9 @@ const BasketItem = ({item, onRemoveFromBasket}) => {
         {item.name}
     </StyledBasketItem>
     <StyledBasketItem>
+        Quantity : {item.quantity}
+    </StyledBasketItem>
+    <StyledBasketItem>
         £{item.price}
     </StyledBasketItem>
     <StyledBasketItem>
