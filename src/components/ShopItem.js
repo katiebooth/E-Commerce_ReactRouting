@@ -44,17 +44,19 @@ const StyledLink = styled(Link)`
     }
 `
 
-const ShopItem = ({item, onAddToBasket}) => {
+const ShopItem = ({item, onAddToBasket, incrementQuantity, decrementQuantity}) => {
 
     const handleClick = () => {
         onAddToBasket({item})
     }
 
-    // const navigate = useNavigate()
+    const handleIncreaseQuantity = () => {
+        incrementQuantity({item})
+    }
 
-    // const navigateToProductDetails = () => {
-    //     navigate(`/displayitem/:id`)
-    // }
+    const handleDecreaseQuantity = () => {
+        decrementQuantity({item})
+    }
 
     return (<>
     
@@ -66,11 +68,11 @@ const ShopItem = ({item, onAddToBasket}) => {
         Quantity
         </p>
         <div className="quantity-input">
-        <button className="quantity-input__modifier quantity-input__modifier--left" onClick={() => item.quantity -=1}>
+        <button className="quantity-input__modifier quantity-input__modifier--left" onClick={handleDecreaseQuantity}>
           &mdash;
         </button>
         <input className="quantity-input__screen" type="text" value={item.quantity} readOnly />
-        <button className="quantity-input__modifier quantity-input__modifier--right" onClick={() => item.quantity +=1}>
+        <button className="quantity-input__modifier quantity-input__modifier--right" onClick={handleIncreaseQuantity}>
           &#xff0b;
         </button>  
       </div>  

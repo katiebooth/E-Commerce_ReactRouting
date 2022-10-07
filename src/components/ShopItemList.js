@@ -10,7 +10,13 @@ const ShopListStyle = styled.ul`
 
 const ShopItemList = ({shopItems, handleAddToBasket, onItemSelected, navigateToProductDetails, incrementQuantity, decrementQuantity}) => {
     const listItems = shopItems.map((item, index) =>{
-        return <ShopItem item = {item} key ={index} onAddToBasket = {handleAddToBasket} onItemSelected={onItemSelected} navigateToProductDetails={navigateToProductDetails}/>
+        return <ShopItem item = {item} 
+                        key ={index} 
+                        onAddToBasket = {handleAddToBasket} 
+                        onItemSelected={onItemSelected} 
+                        navigateToProductDetails={navigateToProductDetails} 
+                        incrementQuantity={incrementQuantity} 
+                        decrementQuantity={decrementQuantity} />
     })
 
     return (

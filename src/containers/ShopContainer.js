@@ -24,15 +24,23 @@ const ShopContainer = () => {
             return JSON.parse(basketItemsJSON)}
     })
 
-    // const [quantity, updateQuantity] = useState(1)
+    const incrementQuantity = ({item}) => {
+        const copyItem = {...item}
+        copyItem.quantity +=1
+        const copyShopItems = [...shopItems]
+        const indexOfItem = copyShopItems.indexOf(item)
+        copyShopItems[indexOfItem].quantity = copyItem.quantity
+        setShopItems(copyShopItems)
+    }
 
-    // const incrementQuantity = ({item}) => {
-    //     item.quantity += 1
-    // }
-
-    // const decrementQuantity = ({item}) => {
-    //     item.quantity -= 1
-    // }
+    const decrementQuantity = ({item}) => {
+        const copyItem = {...item}
+        copyItem.quantity -=1
+        const copyShopItems = [...shopItems]
+        const indexOfItem = copyShopItems.indexOf(item)
+        copyShopItems[indexOfItem].quantity = copyItem.quantity
+        setShopItems(copyShopItems)
+    }
 
     const getProductGivenId = (productId) => {
         return shopItems.find((item) => item.id === productId);
@@ -57,13 +65,17 @@ const ShopContainer = () => {
         localStorage.setItem('basket items', JSON.stringify(basketItems))
         }, [basketItems])
   
-    const numberOfItemsInBasket = basketItems.length
+    const numberOfItemsInBasket = ()=> {
+        return basketItems.reduce((total, item) => {
+            return total += item.quantity
+        }, 0);
+    }
 
  return (
     <Router>
-    <NavBar numberOfItemsInBasket = {numberOfItemsInBasket}/>
+    <NavBar numberOfItemsInBasket = {numberOfItemsInBasket()}/>
     <Routes>
-        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket}/>}/>
+        <Route path = '/' element={<ShopItemList shopItems ={shopItems} handleAddToBasket = {handleAddToBasket} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity}/>}/>
 
         <Route path = '/basket' element={<BasketList basketItems = {basketItems} handleRemoveFromBasket = {handleRemoveFromBasket} />}/>
 
