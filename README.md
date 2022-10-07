@@ -15,7 +15,8 @@ Individual product page:
 ![E3A19C15-AE16-4F9F-9A16-5A83C2A61724](https://user-images.githubusercontent.com/107416924/194512516-41c0fc9f-a8a7-4b69-8f71-b21a0c783036.jpeg)
 
 Basket page:
-![15157A2F-24ED-4F66-8801-4E196AA6C752](https://user-images.githubusercontent.com/107416924/194513206-12ad8ceb-4038-475c-bb0c-009f18d9680e.jpeg)
+
+![43B99DFD-DA94-4ED0-B76A-121EE3949A17](https://user-images.githubusercontent.com/107416924/194566712-f126b5c5-af0b-400e-82fa-0773bd71ad7a.jpeg)
 
 
 ## Available Scripts!
