@@ -1,6 +1,6 @@
 # E-Commerce React App
 
-This is a simple e-commerce app I created during a paired programming exercise while at CodeClan. We create a Javascript app which uses React routing.
+This is a simple e-commerce app I created during a paired programming exercise while at CodeClan. We built a Javascript app which uses React routing.
 On the Home page the available products are displayed. Further information about the products is displayed upon clicking on the "View Product Details" button. The quantity of the product can be updated and then added to the basket. 
 
 Clicking on the basket in the top right corner of the screen will take the user to their basket, where the total price is displayed.
