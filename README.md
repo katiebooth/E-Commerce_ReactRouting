@@ -7,7 +7,8 @@ Clicking on the basket in the top right corner of the screen will take the user 
 
 Homepage displaying all available items:
 
-[30D9D247-7A32-4163-BA94-8D02A34882FF](https://user-images.githubusercontent.com/107416924/194512501-8f819a2b-0831-4a14-8be9-6577d8fd8948.jpeg)
+![30D9D247-7A32-4163-BA94-8D02A34882FF](https://user-images.githubusercontent.com/107416924/194512752-7fade682-13c7-4450-857d-96e7dc014871.jpeg)
+
 
 Individual product page:
 
